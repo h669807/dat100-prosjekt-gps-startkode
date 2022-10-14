@@ -53,11 +53,16 @@ public class ShowRoute extends EasyGraphics {
 	// antall y-pixels per breddegrad
 	public double ystep() {
 	
-		double ystep;
 		
 		// TODO - START
+		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+
+		double ystep = MAPYSIZE / (Math.abs(maxlat - minlat)); 
+
+		return ystep;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 		
@@ -66,8 +71,32 @@ public class ShowRoute extends EasyGraphics {
 	public void showRouteMap(int ybase) {
 
 		// TODO - START
+		double minlon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+
+		int r = 3;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i = 0; i < gpspoints.length-1; i++) {
+			setColor(0,0,255);
+			int elevationChange = (int)(gpspoints[i+1].getElevation()-gpspoints[i].getElevation());
+			
+			if(elevationChange > 0) {
+				setColor(0,255,0);
+			}else if (elevationChange == 0) {
+				setColor(0,0,255);
+			}else {
+				setColor(255,0,0);
+			}
+			
+			int x1 = (int)(xstep()*(gpspoints[i].getLongitude()-minlon));
+			int y1 = (int)(ystep()*(gpspoints[i].getLatitude()-minlat));
+			int x2 = (int)(xstep()*(gpspoints[i+1].getLongitude()-minlon));
+			int y2 = (int)(ystep()*(gpspoints[i+1].getLatitude()-minlat));
+			fillCircle(MARGIN+x1, ybase-y1,r);
+			drawLine(MARGIN+x1, ybase-y1, MARGIN+x2, ybase-y2);
+		}
+		
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 	}
@@ -80,8 +109,11 @@ public class ShowRoute extends EasyGraphics {
 		setFont("Courier",12);
 		
 		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		String[] stats = gpscomputer.getStatistics();
+		for(int i = 0; i < stats.length; i++) {
+			drawString(stats[i], 10, 20 + TEXTDISTANCE*i);
+		}
+		//hrow new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT;
 	}

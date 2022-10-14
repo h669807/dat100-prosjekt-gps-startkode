@@ -48,8 +48,29 @@ public class ShowProfile extends EasyGraphics {
 		int x = MARGIN,y;
 
 		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
+		setColor(0, 0, 255);
+		setFont("Courier", 10);
+		
+		int maxHeight = 0;
+		
+		for (int i = 0; i < gpspoints.length; i++) {
+			int height = 0;
+			if (gpspoints[i].getElevation()>0) {
+				height = (int)gpspoints[i].getElevation();
+			}
+			if (height > maxHeight) {
+				maxHeight = height;
+			}
+			drawLine(x,ybase,x,ybase-height);
+			x += 3;
+		}
+		
+		for (int i = 0; i < maxHeight; i++) {
+			if (i%10 == 0 && i >=0) {
+				drawString(String.valueOf(i)+"m",MARGIN-40, ybase-i);
+			}
+		}
+		//throw new UnsupportedOperationException(TODO.method());
 	
 		// TODO - SLUTT
 	}
