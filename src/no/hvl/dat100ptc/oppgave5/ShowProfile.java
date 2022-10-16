@@ -43,7 +43,7 @@ public class ShowProfile extends EasyGraphics {
 
 	public void showHeightProfile(int ybase) {
 
-		// ybase indicates the position on the y-axis where the columns should start
+		int gain = Integer.parseInt(getText("Oppgi ønsket hastighet på avlesning"));
 	
 		int x = MARGIN,y;
 
@@ -54,6 +54,13 @@ public class ShowProfile extends EasyGraphics {
 		int maxHeight = 0;
 		
 		for (int i = 0; i < gpspoints.length; i++) {
+			
+			double timechange = 0;
+			if (i < gpspoints.length - 1) {
+				timechange = gpspoints[i+1].getTime()-gpspoints[i].getTime();
+				
+			}
+			
 			int height = 0;
 			if (gpspoints[i].getElevation()>0) {
 				height = (int)gpspoints[i].getElevation();
@@ -63,6 +70,8 @@ public class ShowProfile extends EasyGraphics {
 			}
 			drawLine(x,ybase,x,ybase-height);
 			x += 3;
+			
+			pause((int)timechange*1000/gain);
 		}
 		
 		for (int i = 0; i < maxHeight; i++) {
@@ -70,9 +79,7 @@ public class ShowProfile extends EasyGraphics {
 				drawString(String.valueOf(i)+"m",MARGIN-40, ybase-i);
 			}
 		}
-		//throw new UnsupportedOperationException(TODO.method());
-	
-		// TODO - SLUTT
+		
 	}
 
 }

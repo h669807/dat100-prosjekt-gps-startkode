@@ -66,19 +66,108 @@ public class CycleComputer extends EasyGraphics {
 
 	
 	public void bikeRoute() {
+		
+				
+		int ybase = 600;
+		int ybase1 = 200;
+		
+		double minlon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
 
-		throw new UnsupportedOperationException(TODO.method());
-
+		int firstx = (int)(xstep()*(gpspoints[0].getLongitude()-minlon));
+		int firsty = (int)(ystep()*(gpspoints[0].getLatitude()-minlat));
+		
+		setColor (0,0,255);
+		int nodeId = fillCircle(MARGIN + firstx, ybase - firsty,5);
+		
+		int r = 3;
+		int maxHeight = 0;
+		int x = MARGIN,y;
+		int tid = 0;
+		int fart = 0;
+	
+		for (int i = 0; i < gpspoints.length-1; i++) {
+			int fartid = drawString(GPSUtils.formatDouble(GPSUtils.speed(gpspoints[i], gpspoints[i+1])), 10 , 40);
+			
+			int time = gpspoints[i].getTime();
+			setFont("Courier",18);
+			
+			int id = drawString(GPSUtils.formatTime(time), 10, 20);
+			tid = id;
+			fart = fartid;
+			
+			double timechange = 0;
+			if (i < gpspoints.length - 1) {
+				timechange = gpspoints[i+1].getTime()-gpspoints[i].getTime();
+				
+			}
+			
+			
+			int height = 0;
+			if (gpspoints[i].getElevation()>0) {
+				height = (int)gpspoints[i].getElevation();
+			}
+			if (height > maxHeight) {
+				maxHeight = height;
+			}
+			drawLine(x,ybase1,x,ybase1-height);
+			x += 3;
+			
+			
+						
+			int elevationChange = (int)(gpspoints[i+1].getElevation()-gpspoints[i].getElevation());
+			
+			if(elevationChange > 0) {
+				setColor(255,0,0);
+			}else if (elevationChange == 0) {
+				setColor(0,0,255);
+			}else {
+				setColor(0,255,0);
+			}
+			
+			int x1 = (int)(xstep()*(gpspoints[i].getLongitude()-minlon));
+			int y1 = (int)(ystep()*(gpspoints[i].getLatitude()-minlat));
+			int x2 = (int)(xstep()*(gpspoints[i+1].getLongitude()-minlon));
+			int y2 = (int)(ystep()*(gpspoints[i+1].getLatitude()-minlat));
+			fillCircle(MARGIN+x1, ybase-y1,r);
+			drawLine(MARGIN+x1, ybase-y1, MARGIN+x2, ybase-y2);
+			
+			
+			int speed= 1;
+			
+			setColor(0,0,255); 
+			setSpeed((int)speed);
+			moveCircle(nodeId,MARGIN+x1, ybase-y1);
+			
+			setVisible(tid,false);	
+			setVisible(fart,false);	
+			}
 	}
 
+	
 	public double xstep() {
+		
+		double maxlon = GPSUtils.findMax(GPSUtils.getLongitudes(gpspoints));
+		double minlon = GPSUtils.findMin(GPSUtils.getLongitudes(gpspoints));
 
-		throw new UnsupportedOperationException(TODO.method());
+		double xstep = ROUTEMAPXSIZE / (Math.abs(maxlon - minlon)); 
+
+		return xstep;
 	}
 
 	public double ystep() {
 
-		throw new UnsupportedOperationException(TODO.method());
+		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+
+		double ystep = ROUTEMAPYSIZE / (Math.abs(maxlat - minlat)); 
+
+		return ystep;	}
+
+	
+		
+		
 	}
 
-}
+
+
