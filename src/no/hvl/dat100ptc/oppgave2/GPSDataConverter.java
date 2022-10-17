@@ -18,29 +18,25 @@ public class GPSDataConverter {
 
 		// TODO
 		// OPPGAVE - START
+		// Henter ut timer.
 		hr = Integer.parseInt(timestr.substring(11, 13));
+		// Henter ut minutter.
 		min = Integer.parseInt(timestr.substring(14, 16));
+		// Henter ut sekunder.
 		sec = Integer.parseInt(timestr.substring(17, 19));
+		// Regner om til sekunder og returnerer.
 		return hr * 3600 + min * 60 + sec;
-
-		// throw new UnsupportedOperationException(TODO.method());
-
 		// OPPGAVE - SLUTT
-
 	}
 
 	public static GPSPoint convert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
-
 		GPSPoint gpspoint;
-
 		// TODO - START ;
+		// Konverterer strengene til forventede typer og lager nytt gpspoint objekt.
 		gpspoint = new GPSPoint(toSeconds(timeStr), Double.parseDouble(latitudeStr), Double.parseDouble(longitudeStr),
 				Double.parseDouble(elevationStr));
 		return gpspoint;
-		// throw new UnsupportedOperationException(TODO.method());
-
 		// OPPGAVE - SLUTT ;
-
 	}
 
 }

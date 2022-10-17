@@ -1,86 +1,66 @@
 package no.hvl.dat100ptc.oppgave1;
 
-import no.hvl.dat100ptc.TODO;
-
 public class GPSPoint {
 
 	// TODO - objektvariable
+	// Deklarerer objektvariabler.
 	private int time;
 	private double latitude;
 	private double longitude;
 	private double elevation;
 		
+	
+	/**
+	* Konstruktør
+	*/
 	public GPSPoint(int time, double latitude, double longitude, double elevation) {
 
 		// TODO - konstruktør
+		// Setter vi objektvariablne til verdier som blir gitt konstreuktøren.
 		this.time = time;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.elevation = elevation;
-
-		// Fjern linjene med throw new etterhvert som metodene implementeres
-		//throw new UnsupportedOperationException(TODO.construtor("GPSPoint"));
-
 	}
 
 	// TODO - get/set metoder
-	public int getTime() {
-		
-		//throw new UnsupportedOperationException(TODO.method());
+	public int getTime() {	
 		return this.time;
 	}
 
 	public void setTime(int time) {
 		this.time=time;		
-		//throw new UnsupportedOperationException(TODO.method());
-
 	}
 
 	public double getLatitude() {
-		
-		//throw new UnsupportedOperationException(TODO.method());
 		return this.latitude;
 	}
 
 	public void setLatitude(double latitude) {
 		this.latitude=latitude;
-		//throw new UnsupportedOperationException(TODO.method());
-		
 	}
 
 	public double getLongitude() {
-		
-		//throw new UnsupportedOperationException(TODO.method());
 		return this.longitude;
 	}
 
 	public void setLongitude(double longitude) {
 		this.longitude=longitude;
-		//throw new UnsupportedOperationException(TODO.method());
-		
 	}
 
 	public double getElevation() {
-		
-		//throw new UnsupportedOperationException(TODO.method());
 		return this.elevation;
 	}
 
 	public void setElevation(double elevation) {
 		this.elevation=elevation;
-		//throw new UnsupportedOperationException(TODO.method());
-		
 	}
 	
 	public String toString() {
-		
-		String str;
-		
-		// TODO - start
-		str=this.time + " ("+ this.latitude + ","+ this.longitude+ ") " + this.elevation + "\n";
-		return str;
-		//throw new UnsupportedOperationException(TODO.method());
 
+		// TODO - start
+		return this.time + " ("+ this.latitude + ","+ 
+			   this.longitude+ ") " + this.elevation + "\n";
 		// TODO - slutt
 		
 	}
