@@ -112,7 +112,12 @@ public class CycleComputer extends EasyGraphics {
 			}
 
 			drawLine(x,ybase1,x,(int)(ybase1-height/2));
-			x += (int)(ROUTEMAPXSIZE / N)*1.5;
+			if (3*N < ROUTEMAPXSIZE) {
+				x += 3;
+			} else {
+				x += (int)ROUTEMAPXSIZE/N;
+			}
+			
 			
 			
 						
