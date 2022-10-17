@@ -87,7 +87,7 @@ public class CycleComputer extends EasyGraphics {
 		int fart = 0;
 	
 		for (int i = 0; i < gpspoints.length-1; i++) {
-			int fartid = drawString(GPSUtils.formatDouble(GPSUtils.speed(gpspoints[i], gpspoints[i+1])), 10 , 40);
+			int fartid = drawString(GPSUtils.formatDouble(GPSUtils.speed(gpspoints[i], gpspoints[i+1])) + " km/t", 10 , 40);
 			
 			int time = gpspoints[i].getTime();
 			setFont("Courier",18);
@@ -110,8 +110,9 @@ public class CycleComputer extends EasyGraphics {
 			if (height > maxHeight) {
 				maxHeight = height;
 			}
-			drawLine(x,ybase1,x,ybase1-height);
-			x += 3;
+
+			drawLine(x,ybase1,x,(int)(ybase1-height/2));
+			x += (int)(ROUTEMAPXSIZE / N)*1.5;
 			
 			
 						
