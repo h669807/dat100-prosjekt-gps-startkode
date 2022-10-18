@@ -144,7 +144,7 @@ public class GPSComputer {
 			met = 10;
 		} else if (speedmph >=16 && speedmph < 20) {
 			met = 12; 
-		} else if (speedmph >=20) {
+		} else {
 			met = 16; 
 		}
 		return met * weight * ((double) secs/3600);
